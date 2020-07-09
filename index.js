@@ -15,16 +15,39 @@ function timeConverter(UNIX_timestamp){
     var month = months[a.getMonth()];
     var date = a.getDate();
     var hour = a.getHours();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + "o'clock";
+    var time = /*date + ' ' + month + ' ' + year + ' ' +*/ hour + "o'clock";
     return time;
+}
+
+function todayWeather(responseJson) {
+  $('#weather').append(`
+  <h3>Today's Weather</h3>
+  <div id="today">
+  <div><p>${timeConverter(responseJson.hourly[0].dt)}</p>
+  <p>${responseJson.hourly[0].temp}F<p>
+  <p>${responseJson.hourly[0].weather[0].description}</p>
+  <p>Wind speed: ${responseJson.hourly[0].wind_speed}mph</p></div>
+  <div><p>${timeConverter(responseJson.hourly[2].dt)}</p>
+  <p>${responseJson.hourly[2].temp}F<p>
+  <p>${responseJson.hourly[2].weather[0].description}</p>
+  <p>Wind speed: ${responseJson.hourly[2].wind_speed}mph</p></div>
+  <div><p>${timeConverter(responseJson.hourly[4].dt)}</p>
+  <p>${responseJson.hourly[4].temp}F<p>
+  <p>${responseJson.hourly[4].weather[0].description}</p>
+  <p>Wind speed: ${responseJson.hourly[4].wind_speed}mph</p></div>
+  <div><p>${timeConverter(responseJson.hourly[6].dt)}</p>
+  <p>${responseJson.hourly[6].temp}F<p>
+  <p>${responseJson.hourly[6].weather[0].description}</p>
+  <p>Wind speed: ${responseJson.hourly[6].wind_speed}mph</p></div>
+  </div>
+  `)
 }
 
 function displayWeather(responseJson) {
     $('#weather').empty();
     console.log(responseJson);
-    $('#weather').html(`
-    <ul>
-    <li>
+    todayWeather(responseJson);
+    /*$('#weather').html(`
     <p>Today's minimum/maximum temperatures: ${responseJson.daily[0].temp.min}/${responseJson.daily[0].temp.max}F</p>
     <p>Today's predominant weather: ${responseJson.daily[0].weather[0].description}</p>
     <h3>Hourly Weather:</h3>
@@ -38,7 +61,7 @@ function displayWeather(responseJson) {
         <p>Wind speed: ${responseJson.hourly[i].wind_speed}mph</p>
         <li>`)
     }
-    ;
+    ;*/
 }
 
 function formatQueryParams(params) {
