@@ -20,5 +20,16 @@
       #today {
         display: flex;
         flex-direction: row;
-        border: 1px solid #000000;
+        margin: auto;
+        width: auto;
+        justify-content: center;
+      }
+
+      #child {
+        border: solid #000000;
+      }
+
+      #form {
+        justify-content: center;
+        display: flex;
       }
