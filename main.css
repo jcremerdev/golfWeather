@@ -1,4 +1,4 @@
-      * {
+           * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -33,7 +33,6 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        font-size: x-small;
       }
 
       .title {
@@ -54,24 +53,29 @@
         padding: auto;
       }
 
-      #today, #now, #week, #city {
+      #now, #week, #city {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
       }
 
-      .child {
-        height: 100%;
-        width:100px;
+      div table {
+        width: 100%;
         background-color: rgba(255,255,255,0.5);
-        border-radius: 5%;
         text-align: center;
+        border-radius: 10%;
+        border: none; 
+        border-collapse: collapse;
+        margin-top: 10px;
       }
 
-      .child + .child {
-        margin-left: 1%;
-        margin-top: 1%;
+      div table td:first-child { 
+        border-left: none; 
+      }
+
+      div table td { 
+        border-left: 1px solid #000; 
       }
 
       #form {
