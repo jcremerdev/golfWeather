@@ -9,7 +9,7 @@ The function of this app now, is to search a single place designated by the user
 
 ![HomePage](https://github.com/jcremerdev/golfWeather/blob/master/golfWeatherHP.PNG?raw=true)("Home Page")
 
-![WeatherPage]()("Weather Page")
+![WeatherPage](https://github.com/jcremerdev/golfWeather/blob/master/golfWeatherWP.PNG?raw=true)("Weather Page")
 
 APIs used are the google places API and OpenWeatherMap API.
 
