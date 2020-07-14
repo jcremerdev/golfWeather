@@ -13,4 +13,4 @@ The function of this app now, is to search a single place designated by the user
 
 APIs used are the google places API and OpenWeatherMap API.
 
-jQuery, javascript, HTML and CSS were used to put this app together.
+jQuery, javascript, HTML and CSS were used to put this app together. 
