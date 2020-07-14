@@ -16,7 +16,8 @@ function timeConverter(UNIX_timestamp){
     var month = months[a.getMonth()];
     var date = a.getDate();
     var hour = a.getHours();
-    var time = /*date + ' ' + month + ' ' + year + ' ' +*/ hour + "o'clock";
+    var hours = ((hour + 11) % 12 + 1);
+    var time = /*date + ' ' + month + ' ' + year + ' ' +*/ hours + ":00";
     return time;
 }
 
@@ -58,44 +59,109 @@ function timeConverterWeek(UNIX_timestamp){
 
 function weekWeather(responseJson) {
   $('#week').empty();
-  for (let i = 1; i<7; i++) {
     $('#week').append(`
-    <div class="child">
-    <h5>${timeConverterWeek(responseJson.daily[i].dt)}</h5>
-    <p>${Math.round(responseJson.daily[i].temp.min)}F/${Math.round(responseJson.daily[i].temp.max)}F</p>
-    <p>${responseJson.daily[i].weather[0].description}</p>
-    </div>
-    `)
-  }
-}
-
-function nowWeather(responseJson){
-  $('#now').empty();
-  $('#now').append(`
-  <div class="child"><h3>Now</h3>
-      <p>${Math.round(responseJson.hourly[0].temp)}F<p>
-      <p>${responseJson.hourly[0].weather[0].description}</p>
-      <p>Wind: ${Math.round(responseJson.hourly[0].wind_speed)}mph</p>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Day</th>
+          <th scope="col">Temperature (F)</th>
+          <th scope="col">Weather</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[0].dt)}</td>
+          <td>${Math.round(responseJson.daily[0].temp.min)}/${Math.round(responseJson.daily[0].temp.max)}</td>
+          <td>${responseJson.daily[0].weather[0].main}</td>
+        </tr>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[1].dt)}</td>
+          <td>${Math.round(responseJson.daily[1].temp.min)}/${Math.round(responseJson.daily[1].temp.max)}</td>
+          <td>${responseJson.daily[1].weather[0].main}</td>
+        </tr>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[2].dt)}</td>
+          <td>${Math.round(responseJson.daily[2].temp.min)}/${Math.round(responseJson.daily[2].temp.max)}</td>
+          <td>${responseJson.daily[2].weather[0].main}</td>
+        </tr>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[3].dt)}</td>
+          <td>${Math.round(responseJson.daily[3].temp.min)}/${Math.round(responseJson.daily[3].temp.max)}</td>
+          <td>${responseJson.daily[3].weather[0].main}</td>
+        </tr>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[4].dt)}</td>
+          <td>${Math.round(responseJson.daily[4].temp.min)}/${Math.round(responseJson.daily[4].temp.max)}</td>
+          <td>${responseJson.daily[4].weather[0].main}</td>
+        </tr>
+        <tr>
+          <td>${timeConverterWeek(responseJson.daily[5].dt)}</td>
+          <td>${Math.round(responseJson.daily[5].temp.min)}/${Math.round(responseJson.daily[5].temp.max)}</td>
+          <td>${responseJson.daily[5].weather[0].main}</td>
+        </tr>
+      </tbody>
+    </table>
     `)
 }
 
 function todayWeather(responseJson) {
   $('#today').empty();
-  for (let i = 1; i<10; i=i+2){
     $('#today').append(`
-    <div class="child"><h5>In ${(i)} hours</h5>
-      <p>${Math.round(responseJson.hourly[i].temp)}F<p>
-      <p>${responseJson.hourly[i].weather[0].description}</p>
-      <p>Wind: ${Math.round(responseJson.hourly[i].wind_speed)}mph</p>
-    </div>
-    `)
-  }
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Time</th>
+          <th scope="col">Temperature (F)</th>
+          <th scope="col">Wind (MPH)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[0].dt)}</td>
+          <td>${Math.round(responseJson.hourly[0].temp)}</td>
+          <td>${Math.round(responseJson.hourly[0].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[1].dt)}</td>
+          <td>${Math.round(responseJson.hourly[1].temp)}</td>
+          <td>${Math.round(responseJson.hourly[1].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[2].dt)}</td>
+          <td>${Math.round(responseJson.hourly[2].temp)}</td>
+          <td>${Math.round(responseJson.hourly[2].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[3].dt)}</td>
+          <td>${Math.round(responseJson.hourly[3].temp)}</td>
+          <td>${Math.round(responseJson.hourly[3].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[4].dt)}</td>
+          <td>${Math.round(responseJson.hourly[4].temp)}</td>
+          <td>${Math.round(responseJson.hourly[4].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[5].dt)}</td>
+          <td>${Math.round(responseJson.hourly[5].temp)}</td>
+          <td>${Math.round(responseJson.hourly[5].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[6].dt)}</td>
+          <td>${Math.round(responseJson.hourly[6].temp)}</td>
+          <td>${Math.round(responseJson.hourly[6].wind_speed)}</td>
+        </tr>
+        <tr>
+          <td>${timeConverter(responseJson.hourly[7].dt)}</td>
+          <td>${Math.round(responseJson.hourly[7].temp)}</td>
+          <td>${Math.round(responseJson.hourly[7].wind_speed)}</td>
+        </tr>
+      </tbody>
+    </table>`)
 }
 function displayWeather(responseJson) {
     console.log(responseJson);
     $("#Intro").hide();
-    nowWeather(responseJson);
     todayWeather(responseJson);
     weekWeather(responseJson);
 }
