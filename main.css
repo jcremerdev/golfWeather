@@ -1,12 +1,46 @@
       * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body{
+        font-family: 'montserrat', sans-serif;
+        background-image: url('trees-rivers.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      header input {
+        width: 100%;
+        max-width: 280px;
+        padding: auto;
+        margin: auto;
+        border: none;
+        outline: none;
+        background-color: #2FCFFA;
+        border-radius: 16px 0px 16px 0px;
+        border-bottom: 3px solid #31DB6E;
+        color: #313131;
+        font-size: 20px;
+        font-weight: 300;
+        transition: 0.2s ease-out;
+      }
+
+      header {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .title {
+        align-self: center;
       }
       
       #map {
-        height: 50%;
-        width: 90%;
-        margin: auto;
-        padding: auto;
+        height: 0%;
+        width: 0%;
       }
       
       
@@ -17,16 +51,37 @@
         padding: auto;
       }
 
-      #today {
+      #today, #now, #week {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
-        margin: auto;
-        width: auto;
+        margin-top: 30px;
         justify-content: center;
+
       }
 
-      #child {
-        border: solid #000000;
+      #now {
+
+      }
+
+      #week {
+
+      }
+
+      #today {
+
+      }
+
+      .child {
+        height: 100 %;
+        width:120px;
+        background-color: rgba(255,255,255,0.5);
+        border-radius: 5%;
+        text-align: center;
+      }
+
+      .child + .child {
+        margin-left: 1%;
       }
 
       #form {
