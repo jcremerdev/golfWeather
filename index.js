@@ -3,6 +3,7 @@
 const weatherURL = 'https://api.openweathermap.org/data/2.5/onecall'
 const weatherAPI = '116aca242c5f08dc2166394d2f40f3b8'
 const googleAPI = 'AIzaSyBYsjmWMCMAbPap8N1BHN9P4RImidA6sGk'
+const reverseGeocodingURL = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 var map;
 var service;
@@ -19,6 +20,31 @@ function timeConverter(UNIX_timestamp){
     return time;
 }
 
+function displayCity(responseJson2) {
+  console.log(responseJson2);
+  $('#city').empty();
+  $('#city').append(`${responseJson2.results[0].formatted_address}
+  `)
+}
+
+function getCity(lat, long) {
+  const url = reverseGeocodingURL + '?' + 'latlng=' + lat + ',' + long + '&key=' + googleAPI;
+   
+  console.log(url);
+
+  fetch(url)
+      .then(response => {
+          if (response.ok) {
+              return response.json();
+          }
+          throw new Error(response.statusText);
+      })
+      .then(responseJson2 => displayCity(responseJson2))
+      .catch(err => {
+          $('#js-error-message').text(`Something went wrong: ${err.message}`);
+      })
+}
+
 function timeConverterWeek(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -32,7 +58,7 @@ function timeConverterWeek(UNIX_timestamp){
 
 function weekWeather(responseJson) {
   $('#week').empty();
-  for (let i = 1; i<responseJson.daily.length; i++) {
+  for (let i = 1; i<7; i++) {
     $('#week').append(`
     <div class="child">
     <h5>${timeConverterWeek(responseJson.daily[i].dt)}</h5>
@@ -56,7 +82,7 @@ function nowWeather(responseJson){
 
 function todayWeather(responseJson) {
   $('#today').empty();
-  for (let i = 1; i<8; i++){
+  for (let i = 1; i<10; i=i+2){
     $('#today').append(`
     <div class="child"><h5>In ${(i)} hours</h5>
       <p>${Math.round(responseJson.hourly[i].temp)}F<p>
@@ -146,6 +172,7 @@ function createMarker(place) {
   const lat = place.geometry.viewport.Za.i;
   const long = place.geometry.viewport.Ua.i;
   getWeather(lat, long);
+  getCity(lat, long);
 }
 
 function watchForm() {
