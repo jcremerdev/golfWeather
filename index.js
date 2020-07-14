@@ -26,56 +26,50 @@ function timeConverterWeek(UNIX_timestamp){
   var month = months[a.getMonth()];
   var date = a.getDate();
   var hour = a.getHours();
-  var time = date + ' ' + month/* + ' ' + year + ' ' + hour + "o'clock"*/;
+  var time = date + ' ' + month;
   return time;
 }
 
 function weekWeather(responseJson) {
-  $('#weather').append(`
-  <h3>This Week</h3>
-  <div id="today">`)
+  $('#week').empty();
   for (let i = 1; i<responseJson.daily.length; i++) {
-
-    $('#weather').append(`
-    <div id="child">
+    $('#week').append(`
+    <div class="child">
     <h5>${timeConverterWeek(responseJson.daily[i].dt)}</h5>
-    <p>${responseJson.daily[i].temp.min}F/${responseJson.daily[i].temp.max}F</p>
+    <p>${Math.round(responseJson.daily[i].temp.min)}F/${Math.round(responseJson.daily[i].temp.max)}F</p>
     <p>${responseJson.daily[i].weather[0].description}</p>
-    <p></p>
     </div>
     `)
   }
-  $('#weather').append(`</div>`)
+}
+
+function nowWeather(responseJson){
+  $('#now').empty();
+  $('#now').append(`
+  <div class="child"><h3>Now</h3>
+      <p>${Math.round(responseJson.hourly[0].temp)}F<p>
+      <p>${responseJson.hourly[0].weather[0].description}</p>
+      <p>Wind: ${Math.round(responseJson.hourly[0].wind_speed)}mph</p>
+    </div>
+    `)
 }
 
 function todayWeather(responseJson) {
-  $('#weather').append(`
-  <h3>Today's Weather</h3>
-  <div id="today">
-  <div id="child"><h5>${timeConverter(responseJson.hourly[0].dt)}</h5>
-  <p>${responseJson.hourly[0].temp}F<p>
-  <p>${responseJson.hourly[0].weather[0].description}</p>
-  <p>Wind speed: ${responseJson.hourly[0].wind_speed}mph</p></div>
-  <div id="child"><h5>${timeConverter(responseJson.hourly[2].dt)}</h5>
-  <p>${responseJson.hourly[2].temp}F<p>
-  <p>${responseJson.hourly[2].weather[0].description}</p>
-  <p>Wind speed: ${responseJson.hourly[2].wind_speed}mph</p></div>
-  <div id="child"><h5>${timeConverter(responseJson.hourly[4].dt)}</h5>
-  <p>${responseJson.hourly[4].temp}F<p>
-  <p>${responseJson.hourly[4].weather[0].description}</p>
-  <p>Wind speed: ${responseJson.hourly[4].wind_speed}mph</p></div>
-  <div id="child"><h5>${timeConverter(responseJson.hourly[6].dt)}</h5>
-  <p>${responseJson.hourly[6].temp}F<p>
-  <p>${responseJson.hourly[6].weather[0].description}</p>
-  <p>Wind speed: ${responseJson.hourly[6].wind_speed}mph</p></div>
-  </div>
-  </div>
-  `)
+  $('#today').empty();
+  for (let i = 1; i<8; i++){
+    $('#today').append(`
+    <div class="child"><h5>In ${(i)} hours</h5>
+      <p>${Math.round(responseJson.hourly[i].temp)}F<p>
+      <p>${responseJson.hourly[i].weather[0].description}</p>
+      <p>Wind: ${Math.round(responseJson.hourly[i].wind_speed)}mph</p>
+    </div>
+    `)
+  }
 }
-
 function displayWeather(responseJson) {
-    $('#weather').empty();
     console.log(responseJson);
+    $("#Intro").hide();
+    nowWeather(responseJson);
     todayWeather(responseJson);
     weekWeather(responseJson);
 }
@@ -112,7 +106,7 @@ function getWeather(lat, long){
 }
 
 function initMap(searchTerm) {
-  var slc = new google.maps.LatLng(40.76, -111.89);
+  var slc = new google.maps.LatLng(40.7608, -111.8910);
 
   infowindow = new google.maps.InfoWindow();
 
