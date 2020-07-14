@@ -57,6 +57,21 @@ function timeConverterWeek(UNIX_timestamp){
   return time;
 }
 
+function getCardinal(angle) {
+  const degreePerDirection = 360 / 8;
+
+  const offsetAngle = angle + degreePerDirection / 2;
+
+  return (offsetAngle >= 0 * degreePerDirection && offsetAngle < 1 * degreePerDirection) ? "N"
+    : (offsetAngle >= 1 * degreePerDirection && offsetAngle < 2 * degreePerDirection) ? "NE"
+      : (offsetAngle >= 2 * degreePerDirection && offsetAngle < 3 * degreePerDirection) ? "E"
+        : (offsetAngle >= 3 * degreePerDirection && offsetAngle < 4 * degreePerDirection) ? "SE"
+          : (offsetAngle >= 4 * degreePerDirection && offsetAngle < 5 * degreePerDirection) ? "S"
+            : (offsetAngle >= 5 * degreePerDirection && offsetAngle < 6 * degreePerDirection) ? "SW"
+              : (offsetAngle >= 6 * degreePerDirection && offsetAngle < 7 * degreePerDirection) ? "W"
+                : "NW";
+}
+
 function weekWeather(responseJson) {
   $('#week').empty();
     $('#week').append(`
@@ -113,48 +128,57 @@ function todayWeather(responseJson) {
           <th scope="col">Time</th>
           <th scope="col">Temperature (F)</th>
           <th scope="col">Wind (MPH)</th>
+          <th scope="col">Weather</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>${timeConverter(responseJson.hourly[0].dt)}</td>
           <td>${Math.round(responseJson.hourly[0].temp)}</td>
-          <td>${Math.round(responseJson.hourly[0].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[0].wind_speed)}@${getCardinal(responseJson.hourly[0].wind_deg)}</td>
+          <td>${responseJson.hourly[0].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[1].dt)}</td>
           <td>${Math.round(responseJson.hourly[1].temp)}</td>
-          <td>${Math.round(responseJson.hourly[1].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[1].wind_speed)}@${getCardinal(responseJson.hourly[1].wind_deg)}</td>
+          <td>${responseJson.hourly[1].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[2].dt)}</td>
           <td>${Math.round(responseJson.hourly[2].temp)}</td>
-          <td>${Math.round(responseJson.hourly[2].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[2].wind_speed)}@${getCardinal(responseJson.hourly[2].wind_deg)}</td>
+          <td>${responseJson.hourly[2].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[3].dt)}</td>
           <td>${Math.round(responseJson.hourly[3].temp)}</td>
-          <td>${Math.round(responseJson.hourly[3].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[3].wind_speed)}@${getCardinal(responseJson.hourly[3].wind_deg)}</td>
+          <td>${responseJson.hourly[3].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[4].dt)}</td>
           <td>${Math.round(responseJson.hourly[4].temp)}</td>
-          <td>${Math.round(responseJson.hourly[4].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[4].wind_speed)}@${getCardinal(responseJson.hourly[4].wind_deg)}</td>
+          <td>${responseJson.hourly[4].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[5].dt)}</td>
           <td>${Math.round(responseJson.hourly[5].temp)}</td>
-          <td>${Math.round(responseJson.hourly[5].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[5].wind_speed)}@${getCardinal(responseJson.hourly[5].wind_deg)}</td>
+          <td>${responseJson.hourly[5].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[6].dt)}</td>
           <td>${Math.round(responseJson.hourly[6].temp)}</td>
-          <td>${Math.round(responseJson.hourly[6].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[6].wind_speed)}@${getCardinal(responseJson.hourly[6].wind_deg)}</td>
+          <td>${responseJson.hourly[6].weather[0].main}</td>
         </tr>
         <tr>
           <td>${timeConverter(responseJson.hourly[7].dt)}</td>
           <td>${Math.round(responseJson.hourly[7].temp)}</td>
-          <td>${Math.round(responseJson.hourly[7].wind_speed)}</td>
+          <td>${Math.round(responseJson.hourly[7].wind_speed)}@${getCardinal(responseJson.hourly[7].wind_deg)}</td>
+          <td>${responseJson.hourly[7].weather[0].main}</td>
         </tr>
       </tbody>
     </table>`)
