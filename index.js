@@ -2,7 +2,7 @@
 
 const weatherURL = 'https://api.openweathermap.org/data/2.5/onecall'
 const weatherAPI = '116aca242c5f08dc2166394d2f40f3b8'
-const googleAPI = 'AIzaSyBYsjmWMCMAbPap8N1BHN9P4RImidA6sGk'
+const googleAPI = 'AIzaSyD1t2N61XYux92acTYddCGEm7OIdUIzJJs'
 const reverseGeocodingURL = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 var map;
